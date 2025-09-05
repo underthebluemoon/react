@@ -1,47 +1,43 @@
-import { useState } from 'react';
+import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
 import './App.css';
-import Header from './components/Header.jsx';
-      // 이름 지정    // 위치 지정
-import Footer from './components/Footer.jsx';
-import ProductList from './components/ProductList.jsx';
-import TabUi from './components/TabUi.jsx';
 
 function App() {
+                  // useNavigate : hook. import 필요. 함수를 받음
+  // 컴포넌트 내부에서 프로그래밍 방식으로 페이지 이동을 구현
+  const navigate = useNavigate();
 
-  const [prodFlg, setProdFlg] = useState(true);
-  const [tabFlg, setTabFlg] = useState(false);
-
-  const viewProductList = () => {
-    setProdFlg(true);
-    setTabFlg(false);
+  const ok = () => {
+    navigate('/ok');
   }
-  const viewTabUi = () => {
-    setProdFlg(false);
-    setTabFlg(true);
-  }
-
 
   return (
     <>
-      <Header></Header>
-      {/* 임포트한 jsx를 사용 */}
-      <main>
-        <div>
-          <span onClick={viewProductList}>상품리스트</span>
-          <span onClick={viewTabUi}>테스트</span>
+      <header>
+        <h1>앱</h1>
+        <div className="nav">
+            {/* Link : react-router-dom 에서 제공하는 컴포넌트. 임포트 필요. 해당 부분만 리랜더링
+                        a태그랑 비슷. HTML에서 a태그로 만들어짐 (css에서 a태그로) */}
+          <Link to={'/list'} className='link-test'>리스트 페이지</Link>
+          <Link to={'/detail'}>상세 페이지</Link>
+          <br />
+              {/* NavLink : Link와 같지만, 활성화된 링크에 className=active 자동부여 */}
+          <NavLink to={'/list'}>리스트 페이지</NavLink>
+          <NavLink to={'/detail'}>상세 페이지</NavLink>
+          <br />
+          <button type='button' onClick={ok}>확인</button>
         </div>
-        { tabFlg && <TabUi></TabUi> }
-        { prodFlg && <ProductList></ProductList> }
-      </main>
-      <Footer></Footer>
-    </>
-  );
+      </header>
 
+      <main>
+        {/* 라우터의 자식 컴포넌트를 출력 */}
+        <Outlet></Outlet>
+      </main>
+
+      <footer>
+        <p>카피라이트</p>
+      </footer>
+    </>
+  )
 }
 
 export default App;
-  // export deafault App : main에서 import
-    // -> 받을 때 이름을 정할 수 있음
-  // export { App } : named export. 이름이 지정된 객체로 내보냄.
-    // -> mian에서 받을 때 App으로 받아야 함.
-    // { App }로 받거나, 객체처럼 사용하거나. 

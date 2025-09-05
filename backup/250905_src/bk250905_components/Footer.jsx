@@ -4,7 +4,7 @@ function Footer() {
 
   return (
     <footer>
-      <p>© Green Corp.</p>
+      <p>© Meow Corp.</p>
     </footer>
   );
 
