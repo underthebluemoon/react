@@ -30,3 +30,14 @@ src/store/modules|slices/**
 import 필요
 
 6. 사용
+
+
+** Redux Thunk **
+1. Reduct Thunk 설치
+npm install redux-thunk
+
+2. Redux Thunk 파일 생성
+scr/store/thunks/**
+(axios 필요시 설치 : npm install axios)
+
+3. 해당 Slice에 `extraReducers` 추가
